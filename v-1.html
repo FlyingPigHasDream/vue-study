@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" >
+    <h2>
+        {{message}}
+        <span v-text="message+'!'"></span>
+        <ul>
+            <li>{{campus[0]}}</li>
+        </ul>
+        <p v-html="content"></p>
+    </h2>
+        <input type="button" value="事件绑定" v-on:dblclick="dolt">
+        <input type="button" value="事情" v-on:click="ck">
+        <input type="button" value="-" v-on="sub">
+        <input type="button" value="getJoke" v-on:click="getJoke">
+        <span v-text="num"></span>
+        <input type="button" value="+" v-on="add">
+        <img :src="imgUrl">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "你好小黑",
+                num:1,
+                joke:"很好的笑话",
+                school: {
+                    name:"黑马程序员",
+                    mobile:"500-31231-2131",
+                    food:"食物"
+                },
+                campus:["123", "213", "213", "321"],
+                content:"<a href='http://www.baidu.com'>百度</a>",
+                imgUrl:"http://www.itheima.com/images/logo.png"
+            },
+            methods: {
+                getJoke:function () {
+                    axios.get('https://autumnfish.cn.api/joke').then(
+                        function (response) {
+                            console.log(response)
+                        },
+                        function (response) {
+                            console.log(response)
+                        }
+                    )
+                },
+                dolt:function () {
+                    alert("do it");
+                },
+                ck:function () {
+                    console.log(this.food)
+                },
+                sub:function () {
+                    this.num--;
+                },
+                add:function () {
+                    this.num++;
+                },
+                change:function () {
+
+                }
+
+            }
+
+        })
+    </script>
+</body>
+</html>
